@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalpli Mesaj</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .heartbeat {
+        animation: heartbeat 1.5s infinite;
+      }
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.3);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.3);
+        }
+        70% {
+          transform: scale(1);
+        }
+      }
+      .twinkle {
+        animation: twinkle 2s infinite ease-in-out;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.3);
+        }
+      }
+      .star-shape {
+        width: 10px;
+        height: 10px;
+        background: transparent;
+        clip-path: polygon(
+          50% 0%,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        );
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-gradient-to-b from-gray-900 to-black text-white min-h-screen flex items-center justify-center relative overflow-hidden"
+  >
+    <!-- Geliştirilmiş Dekoratif Arka Plan -->
+    <div
+      class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden"
+    >
+      <!-- Yıldızlar sadece anasayfada gösterilecek -->
+      <div id="stars-bg"></div>
+    </div>
+
+    <div id="app" class="w-full max-w-4xl mx-auto p-4 z-10">
+      <!-- İsim Seçim Ekranı -->
+      <div
+        id="nameSelection"
+        class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 text-center"
+      >
+        <!-- JavaScript ile butonlar buraya gelecek -->
+      </div>
+
+      <!-- Mesaj Ekranı -->
+      <div
+        id="messageView"
+        class="hidden flex flex-col items-center justify-center text-center mt-12"
+      >
+        <div id="selectedName" class="text-2xl font-bold mb-4"></div>
+        <div
+          class="text-red-500 text-7xl heartbeat cursor-pointer"
+          id="heartBtn"
+        >
+          ❤️
+        </div>
+        <p id="messageText" class="mt-6 text-xl max-w-xl leading-relaxed"></p>
+        <button
+          id="backBtn"
+          class="mt-8 text-sm text-gray-400 hover:text-gray-200 underline"
+        >
+          ← Geri dön ve isimleri gör
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const namesWithMessages = {
+        "Zeynep YEDİKARDAŞ":
+          "Zeynep Hocam bu oyunun olması için çok fazla yoruldunuz ama çok fazlada keyif aldığınızı düşünüyorum. Şuana kadar bu oyun için verdiğiniz bütün emekler ve çabanız için teşekkür ederiz ama özellikle bizleri bir araya getirerek bu oyunun olmasına vesile olduğunuz için ayrı bir teşekkür ederiz.",
+
+        "Bedirhan NEBİOĞLU":
+          "Baş tasarımcımız, Rejimiz, Napoleon'umuz, bu oyunun her şeyi. Zeynep Hocayla birlikte ikinizin vermiş olduğu emeklere özellikle teşekkür etmek lazım.",
+
+        "Azra ŞABEDİNİ":
+          "Oyunun kilit parçası, bizi ve bütün oyunu izleyicilere tanıtma görevinin sahibi The presenter. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Elif Ada DURAN":
+          "Oyunun en önemli karakteri, her şeyi başlatan ve bitiren karakter not master strange - not mister strange Doctor Strange. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Fatma Zehra ÇELİK":
+          "Oyunun en eğlenceli karakterlerinden birisi, hiçkimsenin çayını eksik etmeyen The Hatter. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Betül GÜMÜŞ":
+          "Ayran sarhoşumuz, Cleopatra ve Hürremin bir numaralı flörtü, kalp çalan korsanımız Jack Sparrow. Kaptan Jack Sparrow. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Suzan Melis KARAALİ":
+          "Sülümanın biricik Hürremi, the most powerful woman in history, The Queen, Hürrem Sultan. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Beyza KERMEN":
+          "Dansı ile sahneyi parçalayan, Sezarı kendisine köle yapmış, Nopoleon'u önünde diz çöktürmüş Goddess, Cleopatra. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Şeyma Sultan DOĞAN":
+          "Radyasyon kaynağı yürüyen çernobilimiz, iki Nobel Ödüllü, sahneyi patlatan (Gerçek anlamda) Marie Curie. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Hümeyra ESEN":
+          "Büyüteçli dahimiz, bütün sorunu çözüme kavuşturan, High-functioning sociopaths, the best detective ever Sherlock Holmes. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+
+        "Muhammed Ali UYGUN":
+          "It's gonna be legen - wait for it..., Oyunun bütün saçmalıklarını taşıyan, sezar salatasına bayılan, takım elbiseli amerikan beyfendimiz, Barney Stinson. ...dary. Şimdiye kadar katıldığın her prova, toplantı ve bütün emeklerin için teşekkür ederiz.",
+      };
+
+      const nameSelection = document.getElementById("nameSelection");
+      const messageView = document.getElementById("messageView");
+      const messageText = document.getElementById("messageText");
+      const selectedName = document.getElementById("selectedName");
+      const backBtn = document.getElementById("backBtn");
+      const starsBg = document.getElementById("stars-bg");
+      const heartBtn = document.getElementById("heartBtn");
+
+      const names = Object.keys(namesWithMessages);
+      names.forEach((name) => {
+        const btn = document.createElement("button");
+        btn.className =
+          "p-4 rounded-2xl shadow-md transition text-lg font-semibold bg-gray-800 hover:bg-gray-700 text-white";
+        btn.textContent = name;
+        btn.addEventListener("click", () => {
+          nameSelection.classList.add("hidden");
+          starsBg.classList.add("hidden");
+          selectedName.textContent = name;
+          messageText.textContent = namesWithMessages[name];
+          messageView.classList.remove("hidden");
+        });
+        nameSelection.appendChild(btn);
+      });
+
+      backBtn.addEventListener("click", () => {
+        messageView.classList.add("hidden");
+        nameSelection.classList.remove("hidden");
+        starsBg.classList.remove("hidden");
+      });
+
+      heartBtn.addEventListener("click", () => {
+        messageView.classList.add("hidden");
+        nameSelection.classList.remove("hidden");
+        starsBg.classList.remove("hidden");
+      });
+
+      // Rastgele daha fazla yıldız üret
+      const colors = ["#ffffff", "#ffe4e6", "#fbcfe8", "#fecdd3", "#e0f2fe"];
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        const top = Math.random() * 100;
+        const left = Math.random() * 100;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const delay = Math.random() * 3;
+
+        star.className = "absolute w-2 h-2 star-shape twinkle";
+        star.style.top = `${top}%`;
+        star.style.left = `${left}%`;
+        star.style.backgroundColor = color;
+        star.style.opacity = Math.random() * 0.5 + 0.2;
+        star.style.animationDelay = `${delay}s`;
+
+        starsBg.appendChild(star);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+# 🧵 Fashion Exhibition Web Sitesi - Cursor ToDo Listesi
+
+## 🧱 1. Temel Yapı
+- [x] `index.html`, `style.css`, `script.js` oluşturuldu
+- [x] Dosya yapısı (images, videos, css, js, pages) tamamlandı
+
+## 🎨 2. Koyu Tema & Modern UI
+- [x] Renk paleti belirlendi (siyah, antrasit, koyu gri, neon vurgular)
+- [x] Font seçildi ve eklendi (Google Fonts - Poppins vb.)
+- [x] Temel CSS stilleri tanımlandı
+- [x] Hover ve geçiş animasyonları eklendi
+
+## 📱 3. Responsive Tasarım
+- [x] Mobil öncelikli CSS yazıldı
+- [x] Hamburger menü tasarlandı ve çalışıyor
+- [x] Grid veya Flexbox kullanılarak galeri responsive hale getirildi
+- [x] Görsel/video boyutları responsive oldu
+
+## 🖼️ 4. Tasarım Sayfası Yapısı
+- [x] Her tasarım için ayrı bir HTML sayfası var
+- [x] Sayfada başlık, açıklama, görseller ve video var
+- [x] Görsele tıklayınca modal açılıyor
+- [x] Ok tuşları ile geçiş mümkün
+
+## 🔧 5. JavaScript Etkileşimi
+- [x] Modal pencere çalışıyor
+- [x] Galeri geçişleri sağ/sol yönlerle yapılabiliyor
